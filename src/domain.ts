@@ -164,6 +164,18 @@ function parseDate(value: string): Date | null {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+export function formatMeetingInput(value: string): string {
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value)) {
+    return value;
+  }
+  const date = parseDate(value);
+  if (!date) {
+    return "";
+  }
+  const pad = (part: number) => String(part).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
 function formatMeeting(value: string): string {
   const date = parseDate(value);
   if (!date) {

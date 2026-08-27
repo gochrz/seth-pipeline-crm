@@ -5,6 +5,7 @@ import {
   STAGES,
   formatFullMoney,
   formatMoney,
+  formatMeetingInput,
   getLeadStatus,
   normalizeLeadDraft,
   type LeadRecord
@@ -121,5 +122,18 @@ describe("money formatting", () => {
     expect(formatMoney(12500)).toBe("$12.5k");
     expect(formatFullMoney(12500)).toBe("$12,500");
     expect(formatMoney(0)).toBe("");
+  });
+});
+
+describe("meeting input formatting", () => {
+  it("converts a Calendly timestamp for a local date-time input", () => {
+    const date = new Date("2026-09-01T14:00:00.000Z");
+    const pad = (value: number) => String(value).padStart(2, "0");
+    const expected = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+
+    expect(formatMeetingInput("2026-09-01T14:00:00.000Z")).toBe(expected);
+    expect(formatMeetingInput("2026-09-01T10:30")).toBe(
+      "2026-09-01T10:30"
+    );
   });
 });

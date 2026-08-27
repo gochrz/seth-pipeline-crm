@@ -2,6 +2,7 @@ import {
   CLOSERS,
   OFFERS,
   STAGES,
+  formatMeetingInput,
   normalizeLeadDraft,
   type Closer,
   type LeadRecord,
@@ -357,7 +358,7 @@ function renderDrawer(): void {
     <div class="grid2">
       <div class="field">
         <label class="mono" for="fMeet">Next meeting</label>
-        <input id="fMeet" type="datetime-local" value="${escapeHtml(editing.nextMeeting)}">
+        <input id="fMeet" type="datetime-local" value="${escapeHtml(formatMeetingInput(editing.nextMeeting))}">
         ${past ? '<button class="log-btn" id="logMeeting">Meeting happened — log it</button>' : ""}
       </div>
       <div class="field">

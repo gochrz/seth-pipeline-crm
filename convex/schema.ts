@@ -7,5 +7,14 @@ export default defineSchema({
     ...leadInputValidator.fields,
     createdAt: v.number(),
     updatedAt: v.number()
-  }).index("by_updated_at", ["updatedAt"])
+  }).index("by_updated_at", ["updatedAt"]),
+  calendlyBookings: defineTable({
+    inviteeUri: v.string(),
+    scheduledEventUri: v.string(),
+    eventTypeUri: v.string(),
+    leadId: v.id("leads"),
+    status: v.union(v.literal("active"), v.literal("canceled")),
+    startTime: v.string(),
+    updatedAt: v.number()
+  }).index("by_invitee_uri", ["inviteeUri"])
 });
