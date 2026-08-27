@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+.env.*.local
+.convex
+coverage
+output
+playwright-report
+test-results
+convex/_generated
